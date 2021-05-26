@@ -4,6 +4,7 @@ import { Button, FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback,
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import TodoForm from './components/todoForm';
+import Topbar from './components/topbar';
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -35,21 +36,22 @@ export default function App() {
       onPress={dismissKeyboard}
     >
       <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <View>
-          <TodoForm onSubmit={submitHandler} />
-        </View>
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <TodoItem item={item} onDelete={deleteHandler} />
-            )}
-          />
+        <Topbar />
+        <Header />
+        <View style={styles.content}>
+          <View>
+            <TodoForm onSubmit={submitHandler} />
+          </View>
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              renderItem={({ item }) => (
+                <TodoItem item={item} onDelete={deleteHandler} />
+              )}
+            />
+          </View>
         </View>
       </View>
-    </View>
     </TouchableWithoutFeedback>
   );
 }
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f0f0',
     paddingHorizontal: 10,
-    paddingTop: 60
+    paddingTop: 30
   },
  content: {
 
