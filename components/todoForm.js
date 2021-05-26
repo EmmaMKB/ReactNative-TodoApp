@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import {  Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function TodoForm({ onSubmit }){
     const [text, setText] = useState('');
@@ -9,7 +9,15 @@ export default function TodoForm({ onSubmit }){
     }
 
     const handlePress = () => {
-        onSubmit(text);
+        if (text.length < 3) {
+            Alert.alert("Error", 'Todo text is too short', [
+                {text: 'understood'}
+            ]);
+        }
+        else{
+            onSubmit(text);
+            setText('');
+        }
     }
 
     return(
@@ -19,6 +27,7 @@ export default function TodoForm({ onSubmit }){
                 style={styles.input}
                 placeholder='New todo...'
                 onChangeText={changeHandler}
+                value={text}
              />
              <Button
                 title='Add'
